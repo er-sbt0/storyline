@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — Storyline
+   Six named colors; everything else derives from them. See design/HANDOFF.md.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* Named palette */
+  --color-hood: #a31621;
+  --color-hood-deep: #7e1019;
+  --color-ink: #191614;
+  --color-paper: #e9e5d8;
+  --color-paper-light: #f3efe3;
+  --color-plate: #dbd5c4;
+  --color-forest-deep: #16302a;
+  --color-forest: #24463a;
+  --color-night: #2a3550;
+  --color-gilt: #b98a3c;
+
+  /* Faces: Spanish is always Literata, English is always Archivo,
+     display type is Cormorant Garamond. */
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-literata), Georgia, serif;
+  --font-ui: var(--font-archivo), system-ui, sans-serif;
+
+  /* Radius is 0 everywhere except the audio ring. */
+  --radius-none: 0;
+
+  /* Hard offset print blocks — no blurred UI shadows anywhere. */
+  --shadow-print: 5px 5px 0 rgba(25, 22, 20, 0.18);
+  --shadow-print-tight: 2px 2px 0 rgba(25, 22, 20, 0.22);
+  --shadow-print-lg: 6px 6px 0 rgba(25, 22, 20, 0.16);
+  --shadow-print-cover: 5px 5px 0 rgba(25, 22, 20, 0.1);
+  --shadow-print-modal: 14px 14px 0 rgba(25, 22, 20, 0.28);
+  --shadow-rail: 0 10px 30px rgba(20, 26, 23, 0.22);
+
+  /* The one breakpoint that matters: below this the reader goes single-column. */
+  --breakpoint-wide: 1120px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+/* These element defaults must sit in the `base` layer, or being unlayered
+   would make them outrank every Tailwind utility that tries to override them. */
+@layer base {
+  /* Every link in the five surfaces is a styled component, so links reset to
+     the surrounding type. Bare prose links opt into the accent with `.link`. */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Buttons inherit paper, never a UA chrome look. */
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    cursor: pointer;
+    text-align: inherit;
+  }
+}
+
+.link {
+  color: var(--color-hood);
+  border-bottom: 1px solid rgba(163, 22, 33, 0.35);
+}
+
+.link:hover {
+  color: var(--color-hood-deep);
+  border-bottom-color: var(--color-hood-deep);
+}
+
+::selection {
+  background: rgba(163, 22, 33, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-hood);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
