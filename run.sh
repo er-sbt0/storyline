@@ -8,14 +8,14 @@
 #   ./run.sh build        Build only
 #
 # Environment:
-#   PORT      Port to listen on (default: 3000)
+#   PORT      Port to listen on (default: 5000)
 #   HOSTNAME  Host to bind to (default: next's own default, 0.0.0.0)
 
 set -euo pipefail
 
 cd "$(dirname "$0")"
 
-PORT="${PORT:-3000}"
+PORT="${PORT:-5000}"
 export PORT
 
 command -v node >/dev/null 2>&1 || { echo "run.sh: node is required but not installed" >&2; exit 1; }
